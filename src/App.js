@@ -1,14 +1,8 @@
 import React from 'react';
 import './App.css';
 
-const useFruitesStatus = (fruite) => {
+const useFruitesStatus = () => {
   const [status, setStatus] = React.useState("Available");
-
-  // if(fruite > 0){
-  //   setStatus("Available")
-  // }else{
-  //   setStatus("Not Available")
-  // }
 
   setInterval(() => {
     setStatus(status === "Available" ? "Not Available" : "Available")
@@ -19,7 +13,7 @@ const useFruitesStatus = (fruite) => {
 
 function App() {
 
-  const status = useFruitesStatus(0);
+  const status = useFruitesStatus();
 
   const [appleCount, setAppleCount] = React.useState(0);
   const [mangoCount, setMangoCount] = React.useState(0);
@@ -32,12 +26,14 @@ function App() {
     setLastUpdated(fruite)
   }
 
-  // React.useEffect(()=>{
-  //   document.title = "I will call always"
-  // })
+  React.useEffect(()=>{
+    document.title = "I will call always";
+    console.log("I am called because of re-render")
+  })
 
   React.useEffect(() => {
     setLastUpdated("None")
+    console.log("I am called once")
   }, []);
 
   React.useEffect(() => updateLastFruites("Apple"), [appleCount]);
